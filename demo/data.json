@@ -61,6 +61,7 @@
       "name": "赛博牛马交易日志",
       "description": "BTC/ETH 自动化交易机器人，集成账户管理、风险控制、策略执行、实时图表等功能，把交易决策收进更清晰的驾驶舱里。",
       "url": null,
+      "image": "images/projects/project-crypto-trading.jpg",
       "tech": [
         "Python",
         "量化交易",
@@ -71,6 +72,7 @@
       "name": "A 股量化作战图",
       "description": "A 股市场量化分析与自动化交易策略，实时监控市场动态，智能生成交易信号。",
       "url": null,
+      "image": "images/projects/project-22.png",
       "tech": [
         "Python",
         "量化交易",
@@ -81,6 +83,7 @@
       "name": "Polymarket 自动预测",
       "description": "Polymarket 预测市场自动化扫描与交易，实时监控 20+ 市场，智能识别强信号，自动执行 BUY YES/NO 策略。",
       "url": "https://github.com/nasplycc/personal-homepage",
+      "image": "images/projects/project-polymarket.jpg",
       "tech": [
         "Python",
         "预测市场",
@@ -91,6 +94,7 @@
       "name": "NAS装机助手",
       "description": "NAS装机预算，一键算清主机、硬盘、功耗、电费等总成本。支持群晖、飞牛、绿联、自组等多方案对比，买前算一算，配机不踩坑。",
       "url": "https://mp.weixin.qq.com/s/ZpDeggerBLVOoCTQoErKvw",
+      "image": "images/projects/project-18.jpg",
       "tech": [
         "基于Openclaw",
         "微信小程序"
@@ -100,6 +104,7 @@
       "name": "爪爪技能助手",
       "description": "ClawHub是OpenClaw 技能的移动端发现平台，提供技能浏览、分类搜索、AI 顾问推荐、收藏管理等功能，可以随时随地发现好技能。",
       "url": "https://mp.weixin.qq.com/s/cElBz3gkArzZ9yt0w9So6w",
+      "image": "images/projects/project-20.jpg",
       "tech": [
         "基于Openclaw",
         "微信小程序"
@@ -109,6 +114,7 @@
       "name": "词元算算",
       "description": "智能词元成本计算，快速估算大模型调用费用，支持文本图片文件多场景，模型价格透明对比，AI 用量心中有数。",
       "url": null,
+      "image": "images/projects/project-19.jpg",
       "tech": [
         "基于Openclaw",
         "微信小程序"
