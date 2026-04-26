@@ -73,28 +73,26 @@ function updateTimestamp() {
     document.getElementById('timestamp').textContent = timestamp;
 }
 
-// ==================== 导航切换 ====================
-function switchSection(sectionId) {
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.dataset.section === sectionId) {
-            link.classList.add('active');
+// ==================== 返回顶部 ====================
+function initBackToTop() {
+    const btn = document.getElementById('backToTop');
+    
+    // 滚动时显示/隐藏按钮
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
         }
     });
     
-    const sections = ['home', 'about', 'projects', 'skills', 'connect'];
-    sections.forEach(id => {
-        const section = document.getElementById(`${id}-section`);
-        if (section) section.style.display = 'none';
+    // 点击返回顶部
+    btn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-    
-    const targetSection = document.getElementById(`${sectionId}-section`);
-    if (targetSection) {
-        targetSection.style.display = 'block';
-        targetSection.style.animation = 'none';
-        targetSection.offsetHeight;
-        targetSection.style.animation = 'fadeIn 0.5s ease-out';
-    }
 }
 
 // ==================== 技能图标映射 ====================
@@ -131,8 +129,17 @@ function getProjectIconClass(projectName) {
 // ==================== 加载个人资料 ====================
 async function loadProfile() {
     try {
-        const response = await fetch('/api/profile');
-        const data = await response.json();
+        let data;
+        // 尝试从 API 加载，失败则从 data.json 加载
+        try {
+            const response = await fetch('/api/profile');
+            data = await response.json();
+        } catch {
+            // 回退到 data.json（GitHub Pages 静态模式）
+            const response = await fetch('data.json');
+            const staticData = await response.json();
+            data = staticData.profile;
+        }
         
         const nameEl = document.getElementById('name');
         nameEl.textContent = data.name;
@@ -162,8 +169,17 @@ async function loadProfile() {
 // ==================== 加载技能 ====================
 async function loadSkills() {
     try {
-        const response = await fetch('/api/skills');
-        const skills = await response.json();
+        let skills;
+        // 尝试从 API 加载，失败则从 data.json 加载
+        try {
+            const response = await fetch('/api/skills');
+            skills = await response.json();
+        } catch {
+            // 回退到 data.json（GitHub Pages 静态模式）
+            const response = await fetch('data.json');
+            const staticData = await response.json();
+            skills = staticData.skills;
+        }
         
         const container = document.getElementById('skills');
         container.innerHTML = '';
@@ -207,8 +223,17 @@ async function loadSkills() {
 // ==================== 加载项目 ====================
 async function loadProjects() {
     try {
-        const response = await fetch('/api/projects');
-        const projects = await response.json();
+        let projects;
+        // 尝试从 API 加载，失败则从 data.json 加载
+        try {
+            const response = await fetch('/api/projects');
+            projects = await response.json();
+        } catch {
+            // 回退到 data.json（GitHub Pages 静态模式）
+            const response = await fetch('data.json');
+            const staticData = await response.json();
+            projects = staticData.projects;
+        }
         
         const container = document.getElementById('projects');
         container.innerHTML = '';
@@ -271,8 +296,17 @@ async function loadProjects() {
 // ==================== 加载链接 ====================
 async function loadLinks() {
     try {
-        const response = await fetch('/api/links');
-        const links = await response.json();
+        let links;
+        // 尝试从 API 加载，失败则从 data.json 加载
+        try {
+            const response = await fetch('/api/links');
+            links = await response.json();
+        } catch {
+            // 回退到 data.json（GitHub Pages 静态模式）
+            const response = await fetch('data.json');
+            const staticData = await response.json();
+            links = staticData.links;
+        }
         
         const container = document.getElementById('links');
         container.innerHTML = '';
@@ -328,13 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTimestamp();
     setInterval(updateTimestamp, 1000);
     
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            switchSection(link.dataset.section);
-        });
-    });
-    
-    switchSection('home');
+    initBackToTop();
     
     loadProfile();
     loadSkills();

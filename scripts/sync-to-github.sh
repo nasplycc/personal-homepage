@@ -19,7 +19,7 @@ log "🔄 开始同步检查..."
 log "📤 调用 /api/export 导出静态文件..."
 RESPONSE=$(curl -s -X POST http://localhost:5533/api/export)
 
-if echo "$RESPONSE" | grep -q '"success": true'; then
+if echo "$RESPONSE" | grep -q '"success":true'; then
     log "✅ 静态文件导出成功"
 else
     log "❌ 导出失败：$RESPONSE"

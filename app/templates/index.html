@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaben Zhou | Personal Homepage</title>
+    <title>Nasply | Personal Homepage</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -17,29 +17,6 @@
     
     <!-- 主容器 -->
     <div class="main-container">
-        <!-- 顶部导航栏 -->
-        <nav class="top-nav">
-            <div class="nav-left">
-                <span class="nav-logo">
-                    <span class="prompt">&gt;_</span>
-                    <span class="logo-text">JABEN ZHOU</span>
-                </span>
-            </div>
-            <ul class="nav-center">
-                <li class="nav-link active" data-section="home">HOME</li>
-                <li class="nav-link" data-section="about">ABOUT</li>
-                <li class="nav-link" data-section="projects">PROJECTS</li>
-                <li class="nav-link" data-section="skills">SKILLS</li>
-                <li class="nav-link" data-section="connect">CONNECT</li>
-            </ul>
-            <div class="nav-right">
-                <span class="online-status">
-                    <span class="status-dot"></span>
-                    <span class="status-label">ONLINE</span>
-                </span>
-            </div>
-        </nav>
-        
         <!-- 首页大卡片 - 参考图风格 -->
         <section class="card hero-section" id="home-section">
             <div class="card-corners">
@@ -57,7 +34,7 @@
                     </div>
                 </div>
                 <div class="hero-content">
-                    <h1 class="hero-name glitch" id="name" data-text="Jaben Zhou">Jaben Zhou</h1>
+                    <h1 class="hero-name glitch" id="name" data-text="Nasply">Nasply</h1>
                     <p class="hero-title" id="title">技术爱好者 / NAS 玩家 / 自动化实践</p>
                     <p class="hero-bio" id="bio">热爱折腾，享受自动化带来的便利。<br>专注于构建高效、智能的个人技术栈。</p>
                     <div class="hero-footer">
@@ -76,7 +53,7 @@
         </section>
         
         <!-- ABOUT 模块 -->
-        <section class="card about-section" id="about-section" style="display: none;">
+        <section class="card about-section" id="about-section">
             <div class="card-corners">
                 <span class="corner tl"></span>
                 <span class="corner tr"></span>
@@ -108,7 +85,7 @@
         </section>
         
         <!-- 技能矩阵卡片 -->
-        <section class="card skills-section" id="skills-section" style="display: none;">
+        <section class="card skills-section" id="skills-section">
             <div class="card-corners">
                 <span class="corner tl"></span>
                 <span class="corner tr"></span>
@@ -126,7 +103,7 @@
         </section>
         
         <!-- 项目展示卡片 -->
-        <section class="card projects-section" id="projects-section" style="display: none;">
+        <section class="card projects-section" id="projects-section">
             <div class="card-corners">
                 <span class="corner tl"></span>
                 <span class="corner tr"></span>
@@ -144,7 +121,7 @@
         </section>
         
         <!-- 社交链接卡片 -->
-        <section class="card connect-section" id="connect-section" style="display: none;">
+        <section class="card connect-section" id="connect-section">
             <div class="card-corners">
                 <span class="corner tl"></span>
                 <span class="corner tr"></span>
@@ -164,12 +141,12 @@
         <!-- 底部终端栏 -->
         <footer class="terminal-bar">
             <div class="terminal-left">
-                <span class="terminal-prompt">root@jaben:~$</span>
+                <span class="terminal-prompt">root@nasply:~$</span>
                 <span class="terminal-command">whoami</span>
                 <span class="terminal-cursor"></span>
             </div>
             <div class="terminal-middle">
-                <span class="terminal-output-user" id="terminal-user">jaben_zhou</span>
+                <span class="terminal-output-user" id="terminal-user">nasply</span>
                 <span class="terminal-output-desc" id="terminal-desc">— 技术折腾者 & 自动化实践者</span>
             </div>
             <div class="terminal-right">
@@ -179,6 +156,11 @@
             </div>
         </footer>
     </div>
+    
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" id="backToTop" title="返回顶部">
+        <i class="fas fa-arrow-up"></i>
+    </button>
     
     <!-- 管理入口浮动按钮 -->
     <a href="/login" class="admin-btn" target="_self" title="管理后台">
