@@ -131,8 +131,17 @@ function getProjectIconClass(projectName) {
 // ==================== 加载个人资料 ====================
 async function loadProfile() {
     try {
-        const response = await fetch('/api/profile');
-        const data = await response.json();
+        let data;
+        // 尝试从 API 加载，失败则从 data.json 加载
+        try {
+            const response = await fetch('/api/profile');
+            data = await response.json();
+        } catch {
+            // 回退到 data.json（GitHub Pages 静态模式）
+            const response = await fetch('data.json');
+            const staticData = await response.json();
+            data = staticData.profile;
+        }
         
         const nameEl = document.getElementById('name');
         nameEl.textContent = data.name;
@@ -162,8 +171,17 @@ async function loadProfile() {
 // ==================== 加载技能 ====================
 async function loadSkills() {
     try {
-        const response = await fetch('/api/skills');
-        const skills = await response.json();
+        let skills;
+        // 尝试从 API 加载，失败则从 data.json 加载
+        try {
+            const response = await fetch('/api/skills');
+            skills = await response.json();
+        } catch {
+            // 回退到 data.json（GitHub Pages 静态模式）
+            const response = await fetch('data.json');
+            const staticData = await response.json();
+            skills = staticData.skills;
+        }
         
         const container = document.getElementById('skills');
         container.innerHTML = '';
@@ -207,8 +225,17 @@ async function loadSkills() {
 // ==================== 加载项目 ====================
 async function loadProjects() {
     try {
-        const response = await fetch('/api/projects');
-        const projects = await response.json();
+        let projects;
+        // 尝试从 API 加载，失败则从 data.json 加载
+        try {
+            const response = await fetch('/api/projects');
+            projects = await response.json();
+        } catch {
+            // 回退到 data.json（GitHub Pages 静态模式）
+            const response = await fetch('data.json');
+            const staticData = await response.json();
+            projects = staticData.projects;
+        }
         
         const container = document.getElementById('projects');
         container.innerHTML = '';
@@ -271,8 +298,17 @@ async function loadProjects() {
 // ==================== 加载链接 ====================
 async function loadLinks() {
     try {
-        const response = await fetch('/api/links');
-        const links = await response.json();
+        let links;
+        // 尝试从 API 加载，失败则从 data.json 加载
+        try {
+            const response = await fetch('/api/links');
+            links = await response.json();
+        } catch {
+            // 回退到 data.json（GitHub Pages 静态模式）
+            const response = await fetch('data.json');
+            const staticData = await response.json();
+            links = staticData.links;
+        }
         
         const container = document.getElementById('links');
         container.innerHTML = '';

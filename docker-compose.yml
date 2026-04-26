@@ -9,9 +9,11 @@ services:
     volumes:
       - ./data:/app/data
       - ./app/static:/app/static
+      - ./demo:/app/demo
     environment:
       - FLASK_ENV=production
       - SECRET_KEY=change-this-to-random-secret
+      - APP_DIR=/app
     restart: unless-stopped
     networks:
       - homepage-network

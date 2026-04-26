@@ -134,7 +134,9 @@ def export_static_files():
         }
         
         # 确保 demo 目录存在
-        demo_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'demo')
+        # 在 Docker 容器中，/app 是工作目录
+        base_dir = os.environ.get('APP_DIR', '/app')
+        demo_dir = os.path.join(base_dir, 'demo')
         os.makedirs(demo_dir, exist_ok=True)
         
         # 写入 data.json

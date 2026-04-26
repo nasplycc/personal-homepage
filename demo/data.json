@@ -1,0 +1,45 @@
+{
+  "profile": {
+    "name": "Nasply",
+    "title": "技术爱好者 / NAS 玩家",
+    "bio": "热爱折腾，享受自动化带来的便利\n专注于构建高效、智能的个人技术栈",
+    "avatar": "http://192.168.31.197:3050/api/images/11.png",
+    "location": "中国",
+    "email": "zhoujabn@126.com"
+  },
+  "links": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/nasplycc",
+      "icon": "github"
+    },
+    {
+      "name": "Telegram",
+      "url": "https://t.me/JabenZhou",
+      "icon": "telegram"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Docker",
+      "level": 85,
+      "color": "#00ff88"
+    },
+    {
+      "name": "NAS & 存储",
+      "level": 90,
+      "color": "#00d4ff"
+    },
+    {
+      "name": "Python",
+      "level": 75,
+      "color": "#ff6b6b"
+    },
+    {
+      "name": "Linux",
+      "level": 80,
+      "color": "#ffd93d"
+    }
+  ],
+  "projects": []
+}
