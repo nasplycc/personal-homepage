@@ -46,7 +46,8 @@ body {
     width: 100%;
     height: 100%;
     z-index: -2;
-    opacity: 0.2;
+    opacity: 0.35;
+    filter: brightness(1.3) contrast(1.2);
 }
 
 /* ==================== 扫描线 ==================== */
@@ -60,8 +61,8 @@ body {
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 0, 0, 0.12) 2px,
-        rgba(0, 0, 0, 0.12) 4px
+        rgba(0, 0, 0, 0.08) 2px,
+        rgba(0, 0, 0, 0.08) 4px
     );
     pointer-events: none;
     z-index: 999;
@@ -307,7 +308,7 @@ body {
 .hero-body {
     display: flex;
     align-items: center;
-    gap: 50px;
+    gap: 40px;
 }
 
 .hero-avatar {
@@ -380,6 +381,7 @@ body {
 
 .hero-content {
     flex: 1;
+    min-width: 0;
 }
 
 .hero-name {
@@ -455,14 +457,6 @@ body {
     font-weight: 500;
 }
 
-.hero-bio {
-    color: var(--text-secondary);
-    font-size: 14px;
-    line-height: 2;
-    margin-bottom: 26px;
-    max-width: 550px;
-}
-
 .hero-footer {
     display: flex;
     align-items: center;
@@ -494,6 +488,72 @@ body {
     font-size: 13px;
 }
 
+/* ==================== 右侧 Bio 终端 ==================== */
+.hero-bio-block {
+    flex-shrink: 0;
+    width: 320px;
+}
+
+.bio-terminal {
+    background: rgba(5, 10, 25, 0.9);
+    border: 1px solid rgba(0, 212, 255, 0.25);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+}
+
+.bio-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(10, 18, 35, 0.8);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+.bio-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.bio-dot.red { background: #ff5f57; }
+.bio-dot.yellow { background: #ffbd2e; }
+.bio-dot.green { background: #28c840; }
+
+.bio-title {
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    margin-left: 4px;
+}
+
+.bio-body {
+    padding: 16px 18px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--accent-cyan);
+    min-height: 120px;
+}
+
+.bio-prompt {
+    color: var(--accent-green);
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+.bio-text {
+    color: var(--text-secondary);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.bio-cursor {
+    color: var(--accent-green);
+    animation: blink 1s step-end infinite;
+}
+
 /* ==================== ABOUT 模块 ==================== */
 .about-content {
     display: flex;
@@ -509,9 +569,9 @@ body {
 
 .about-stats {
     display: flex;
-    gap: 50px;
+    gap: 60px;
     justify-content: center;
-    padding-top: 20px;
+    align-items: center;
 }
 
 .stat-item {
@@ -521,7 +581,7 @@ body {
 .stat-value {
     display: block;
     font-family: var(--font-display);
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 900;
     background: var(--gradient-name);
     -webkit-background-clip: text;
@@ -530,7 +590,7 @@ body {
 }
 
 .stat-label {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-muted);
     letter-spacing: 1px;
 }
@@ -642,14 +702,14 @@ body {
 .projects-body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 24px;
 }
 
 .project-item {
     background: rgba(10, 18, 35, 0.6);
     border: 1px solid rgba(30, 50, 90, 0.5);
     border-radius: 12px;
-    padding: 22px;
+    overflow: hidden;
     transition: all 0.3s ease;
     cursor: pointer;
 }
@@ -660,28 +720,34 @@ body {
     transform: translateY(-3px);
 }
 
-.project-icon-box {
-    width: 48px;
-    height: 48px;
+.project-screenshot {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    background: rgba(5, 10, 25, 0.8);
+}
+
+.project-screenshot-placeholder {
+    width: 100%;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    background: rgba(0, 212, 255, 0.08);
-    color: var(--accent-cyan);
+    background: linear-gradient(135deg, rgba(5, 10, 25, 0.9), rgba(15, 25, 50, 0.9));
+    color: var(--text-muted);
+    font-size: 40px;
 }
 
-.project-icon-box.nas { background: rgba(0, 212, 255, 0.12); color: var(--accent-cyan); }
-.project-icon-box.automation { background: rgba(168, 85, 247, 0.12); color: var(--accent-purple); }
-.project-icon-box.ai { background: rgba(236, 72, 153, 0.12); color: var(--accent-pink); }
+.project-info {
+    padding: 18px 20px;
+}
 
 .project-name {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -704,11 +770,109 @@ body {
     line-height: 1.75;
 }
 
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.project-tech-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 4px;
+    color: var(--accent-cyan);
+    font-family: var(--font-mono);
+}
+
 /* ==================== 社交链接 ==================== */
 .connect-body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+
+.connect-links {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
+    width: 100%;
+}
+
+.connect-wechat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 16px 28px;
+    background: rgba(10, 18, 35, 0.6);
+    border: 1px solid rgba(30, 50, 90, 0.5);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.connect-wechat:hover {
+    border-color: rgba(7, 193, 96, 0.35);
+    background: rgba(12, 22, 42, 0.85);
+}
+
+.wechat-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.wechat-info i {
+    font-size: 32px;
+    color: #07c160;
+}
+
+.wechat-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.wechat-id {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+    font-family: var(--font-mono);
+}
+
+.wechat-qr {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.wechat-qr img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.qr-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5, 10, 25, 0.8);
+    color: var(--text-muted);
+    font-size: 24px;
+    gap: 4px;
+}
+
+.qr-placeholder span {
+    font-size: 10px;
+    color: var(--text-muted);
 }
 
 .link-item {
@@ -812,6 +976,49 @@ body {
     letter-spacing: 1px;
 }
 
+/* ==================== 返回顶部按钮 ==================== */
+.back-to-top {
+    position: fixed;
+    bottom: 90px;
+    right: 28px;
+    width: 48px;
+    height: 48px;
+    background: var(--bg-card);
+    border: 1px solid rgba(0, 212, 255, 0.35);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+    transform: scale(1.08);
+}
+
+.back-to-top i {
+    transition: transform 0.3s;
+}
+
+.back-to-top:hover i {
+    transform: translateY(-3px);
+}
+
 /* ==================== 管理按钮 ==================== */
 .admin-btn {
     position: fixed;
@@ -853,28 +1060,14 @@ body {
         padding: 20px 18px 35px;
     }
     
-    .top-nav {
-        flex-wrap: wrap;
-        gap: 16px;
-        padding: 16px 20px;
-    }
-    
-    .nav-center {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
-    .nav-link {
-        padding: 8px 14px;
-        font-size: 11px;
-    }
-    
     .hero-body {
         flex-direction: column;
         text-align: center;
         gap: 35px;
+    }
+    
+    .hero-bio-block {
+        width: 100%;
     }
     
     .hero-footer {
@@ -886,9 +1079,22 @@ body {
     }
     
     .skills-body,
-    .projects-body,
-    .connect-body {
+    .projects-body {
         grid-template-columns: 1fr;
+    }
+    
+    .connect-links {
+        grid-template-columns: 1fr;
+    }
+    
+    .connect-wechat {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    
+    .wechat-info {
+        flex-direction: column;
     }
     
     .terminal-bar {

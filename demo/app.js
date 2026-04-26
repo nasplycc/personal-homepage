@@ -21,7 +21,7 @@ function initMatrix() {
     }
     
     function draw() {
-        ctx.fillStyle = 'rgba(2, 4, 10, 0.06)';
+        ctx.fillStyle = 'rgba(2, 4, 10, 0.04)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         ctx.font = fontSize + 'px JetBrains Mono';
@@ -31,18 +31,38 @@ function initMatrix() {
             
             const rand = Math.random();
             
-            if (rand > 0.90) {
-                // 最亮 - 白色 (10%)
+            if (rand > 0.85) {
+                // 最亮 - 白色 + 霓虹光晕 (15%)
+                ctx.shadowColor = '#ffffff';
+                ctx.shadowBlur = 15;
                 ctx.fillStyle = '#ffffff';
-            } else if (rand > 0.65) {
-                // 中等 - 绿色 (25%)
+            } else if (rand > 0.60) {
+                // 中等 - 霓虹绿 + 光晕 (25%)
+                ctx.shadowColor = '#00ff88';
+                ctx.shadowBlur = 10;
                 ctx.fillStyle = '#00ff88';
-            } else {
-                // 基础 - 青色 (65%)
+            } else if (rand > 0.40) {
+                // 霓虹青 + 光晕 (20%)
+                ctx.shadowColor = '#00d4ff';
+                ctx.shadowBlur = 12;
                 ctx.fillStyle = '#00d4ff';
+            } else if (rand > 0.25) {
+                // 霓虹紫 + 光晕 (15%)
+                ctx.shadowColor = '#a855f7';
+                ctx.shadowBlur = 8;
+                ctx.fillStyle = '#a855f7';
+            } else {
+                // 基础 - 霓虹粉 + 光晕 (25%)
+                ctx.shadowColor = '#ec4899';
+                ctx.shadowBlur = 6;
+                ctx.fillStyle = '#ec4899';
             }
             
             ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+            
+            // 重置阴影
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
             
             if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                 drops[i] = 0;
@@ -73,28 +93,26 @@ function updateTimestamp() {
     document.getElementById('timestamp').textContent = timestamp;
 }
 
-// ==================== 导航切换 ====================
-function switchSection(sectionId) {
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.dataset.section === sectionId) {
-            link.classList.add('active');
+// ==================== 返回顶部 ====================
+function initBackToTop() {
+    const btn = document.getElementById('backToTop');
+    
+    // 滚动时显示/隐藏按钮
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
         }
     });
     
-    const sections = ['home', 'about', 'projects', 'skills', 'connect'];
-    sections.forEach(id => {
-        const section = document.getElementById(`${id}-section`);
-        if (section) section.style.display = 'none';
+    // 点击返回顶部
+    btn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-    
-    const targetSection = document.getElementById(`${sectionId}-section`);
-    if (targetSection) {
-        targetSection.style.display = 'block';
-        targetSection.style.animation = 'none';
-        targetSection.offsetHeight;
-        targetSection.style.animation = 'fadeIn 0.5s ease-out';
-    }
 }
 
 // ==================== 技能图标映射 ====================
@@ -149,7 +167,6 @@ async function loadProfile() {
         
         document.getElementById('title').textContent = data.title;
         document.getElementById('bio').innerHTML = data.bio.replace(/\n/g, '<br>');
-        document.getElementById('about-bio').innerHTML = data.bio.replace(/\n/g, '<br>');
         
         if (data.location) {
             document.getElementById('location').textContent = data.location;
@@ -242,44 +259,68 @@ async function loadProjects() {
         
         if (projects.length === 0) {
             const defaultProjects = [
-                { name: 'NAS 自托管', description: '搭建高可用 NAS 系统，数据存储与备份方案', icon: 'nas' },
-                { name: '自动化工作流', description: '用脚本与自动化工具提升效率，解放双手', icon: 'automation' },
-                { name: 'AI 工具探索', description: '探索 AI 应用与工具，让技术创造更多可能', icon: 'ai' }
+                { 
+                    name: 'NAS 自托管', 
+                    description: '搭建高可用 NAS 系统，数据存储与备份方案',
+                    image: '',
+                    tech: ['Docker', 'NAS']
+                },
+                { 
+                    name: '自动化工作流', 
+                    description: '用脚本与自动化工具提升效率，解放双手',
+                    image: '',
+                    tech: ['Python', 'Automation']
+                }
             ];
             
             defaultProjects.forEach((project) => {
                 const projectItem = document.createElement('div');
                 projectItem.className = 'project-item';
-                const iconMap = { nas: 'fa-server', automation: 'fa-robot', ai: 'fa-brain' };
+                
+                const screenshotHtml = project.image 
+                    ? `<img src="${project.image}" alt="${project.name}" class="project-screenshot" onerror="this.outerHTML='<div class=\'project-screenshot-placeholder\'><i class=\'fas fa-image\'></i></div>'">`
+                    : `<div class="project-screenshot-placeholder"><i class="fas fa-image"></i></div>`;
+                
+                const techHtml = project.tech && project.tech.length > 0
+                    ? `<div class="project-tech">${project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}</div>`
+                    : '';
+                
                 projectItem.innerHTML = `
-                    <div class="project-icon-box ${project.icon}">
-                        <i class="fas ${iconMap[project.icon]}"></i>
+                    ${screenshotHtml}
+                    <div class="project-info">
+                        <div class="project-name">
+                            ${project.name}
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="project-desc">${project.description}</div>
+                        ${techHtml}
                     </div>
-                    <div class="project-name">
-                        ${project.name}
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                    <div class="project-desc">${project.description}</div>
                 `;
                 container.appendChild(projectItem);
             });
         } else {
             projects.forEach((project) => {
-                const iconClass = getProjectIconClass(project.name);
-                const iconParts = iconClass.split(' ');
-                
                 const projectItem = document.createElement('div');
                 projectItem.className = 'project-item';
                 
+                const screenshotHtml = project.image 
+                    ? `<img src="${project.image}" alt="${project.name}" class="project-screenshot" onerror="this.outerHTML='<div class=\'project-screenshot-placeholder\'><i class=\'fas fa-image\'></i></div>'">`
+                    : `<div class="project-screenshot-placeholder"><i class="fas fa-image"></i></div>`;
+                
+                const techHtml = project.tech && project.tech.length > 0
+                    ? `<div class="project-tech">${project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}</div>`
+                    : '';
+                
                 projectItem.innerHTML = `
-                    <div class="project-icon-box ${iconParts[2] || ''}">
-                        <i class="${iconParts[0]} ${iconParts[1]}"></i>
+                    ${screenshotHtml}
+                    <div class="project-info">
+                        <div class="project-name">
+                            ${project.name}
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="project-desc">${project.description || ''}</div>
+                        ${techHtml}
                     </div>
-                    <div class="project-name">
-                        ${project.name}
-                        <i class="fas fa-arrow-right"></i>
-                    </div>
-                    <div class="project-desc">${project.description || ''}</div>
                 `;
                 
                 if (project.url) {
@@ -364,13 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTimestamp();
     setInterval(updateTimestamp, 1000);
     
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            switchSection(link.dataset.section);
-        });
-    });
-    
-    switchSection('home');
+    initBackToTop();
     
     loadProfile();
     loadSkills();
