@@ -36,7 +36,6 @@
                 <div class="hero-content">
                     <h1 class="hero-name glitch" id="name" data-text="Nasply">Nasply</h1>
                     <p class="hero-title" id="title">技术爱好者 / NAS 玩家 / 自动化实践</p>
-                    <p class="hero-bio" id="bio">热爱折腾，享受自动化带来的便利。<br>专注于构建高效、智能的个人技术栈。</p>
                     <div class="hero-footer">
                         <span class="hero-status">
                             <span class="status-dot small"></span>
@@ -47,6 +46,25 @@
                             <i class="fas fa-map-marker-alt"></i>
                             <span id="location">中国</span>
                         </span>
+                    </div>
+                </div>
+                <div class="hero-bio-block" id="bio-block">
+                    <div class="bio-terminal">
+                        <div class="bio-header">
+                            <span class="bio-dot red"></span>
+                            <span class="bio-dot yellow"></span>
+                            <span class="bio-dot green"></span>
+                            <span class="bio-title">about.md</span>
+                        </div>
+                        <div class="bio-body">
+                            <span class="bio-prompt">$</span> cat bio.txt
+                            <br><br>
+                            <span class="bio-text" id="bio">热爱折腾，享受自动化带来的便利。</span>
+                            <br>
+                            <span class="bio-text" id="bio2">用代码连接一切，让技术服务于生活。</span>
+                            <br><br>
+                            <span class="bio-cursor">_</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -66,14 +84,13 @@
                 <span class="header-line"></span>
             </h2>
             <div class="about-content">
-                <p class="about-text" id="about-bio">加载中...</p>
                 <div class="about-stats">
                     <div class="stat-item">
-                        <span class="stat-value">5+</span>
+                        <span class="stat-value">1+</span>
                         <span class="stat-label">年经验</span>
                     </div>
                     <div class="stat-item">
-                        <span class="stat-value">20+</span>
+                        <span class="stat-value">10+</span>
                         <span class="stat-label">项目</span>
                     </div>
                     <div class="stat-item">
@@ -81,6 +98,24 @@
                         <span class="stat-label">热情</span>
                     </div>
                 </div>
+            </div>
+        </section>
+        
+        <!-- 项目展示卡片 -->
+        <section class="card projects-section" id="projects-section">
+            <div class="card-corners">
+                <span class="corner tl"></span>
+                <span class="corner tr"></span>
+                <span class="corner bl"></span>
+                <span class="corner br"></span>
+            </div>
+            <h2 class="section-header">
+                <span class="header-icon"><i class="fas fa-code-branch"></i></span>
+                <span class="header-text">PROJECTS</span>
+                <span class="header-line"></span>
+            </h2>
+            <div class="projects-body" id="projects">
+                <!-- 动态加载 -->
             </div>
         </section>
         
@@ -102,24 +137,6 @@
             </div>
         </section>
         
-        <!-- 项目展示卡片 -->
-        <section class="card projects-section" id="projects-section">
-            <div class="card-corners">
-                <span class="corner tl"></span>
-                <span class="corner tr"></span>
-                <span class="corner bl"></span>
-                <span class="corner br"></span>
-            </div>
-            <h2 class="section-header">
-                <span class="header-icon"><i class="fas fa-folder"></i></span>
-                <span class="header-text">精选项目</span>
-                <span class="header-line"></span>
-            </h2>
-            <div class="projects-body" id="projects">
-                <!-- 动态加载 -->
-            </div>
-        </section>
-        
         <!-- 社交链接卡片 -->
         <section class="card connect-section" id="connect-section">
             <div class="card-corners">
@@ -133,8 +150,22 @@
                 <span class="header-text">CONNECT</span>
                 <span class="header-line"></span>
             </h2>
-            <div class="connect-body" id="links">
-                <!-- 动态加载 -->
+            <div class="connect-body">
+                <div class="connect-links" id="links">
+                    <!-- 动态加载 -->
+                </div>
+                <div class="connect-wechat">
+                    <div class="wechat-info">
+                        <i class="fab fa-weixin"></i>
+                        <div>
+                            <div class="wechat-name">微信公众号</div>
+                            <div class="wechat-id">纳斯派</div>
+                        </div>
+                    </div>
+                    <div class="wechat-qr">
+                        <img src="/static/images/wechat-qr.jpg" alt="微信公众号二维码" onerror="this.parentElement.innerHTML='<div class=\'qr-placeholder\'><i class=\'fas fa-qrcode\'></i><span>二维码</span></div>'">
+                    </div>
+                </div>
             </div>
         </section>
         

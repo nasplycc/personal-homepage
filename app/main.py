@@ -72,6 +72,7 @@ class Project(db.Model):
     description = db.Column(db.Text, default='')
     url = db.Column(db.String(500), default='')
     tech = db.Column(db.String(200), default='')
+    image = db.Column(db.String(500), default='')
     order = db.Column(db.Integer, default=0)
 
 # ==================== 需要登录的 Admin 视图 ====================
@@ -254,6 +255,7 @@ def api_projects():
         'name': p.name,
         'description': p.description,
         'url': p.url,
+        'image': p.image,
         'tech': p.tech.split(',') if p.tech else []
     } for p in projects])
 
@@ -300,6 +302,19 @@ def init_db():
                 Skill(name='Linux', level=80, color='#ffd93d', order=4),
             ]
             db.session.add_all(skills)
+            
+            # 默认项目
+            projects = [
+                Project(
+                    name='OpenClaw NAS 智能体',
+                    description='基于 OpenClaw 的 NAS 智能管理系统，实现自动化运维、内容创作、PT 站点监控等功能',
+                    url='https://github.com/nasplycc/personal-homepage',
+                    image='/static/images/projects/openclaw-nas.png',
+                    tech='Docker,Python,OpenClaw',
+                    order=1
+                ),
+            ]
+            db.session.add_all(projects)
             
             db.session.commit()
         
