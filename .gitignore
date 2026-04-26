@@ -34,5 +34,10 @@ Thumbs.db
 # Logs
 *.log
 
+# Sync hash files
+demo/.hash
+demo/.last-sync-hash
+demo/.last-export
+
 # Docker
 docker-compose.override.yml

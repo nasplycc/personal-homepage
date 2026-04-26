@@ -6,6 +6,9 @@ from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+import json
+import hashlib
+from datetime import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'super-secret-key-change-in-production')
@@ -87,6 +90,83 @@ class SecureModelView(ModelView):
     def _handle_view(self, name, **kwargs):
         if not self.is_accessible():
             return redirect(url_for('login', next=request.url))
+
+# ==================== 导出静态文件 ====================
+
+def export_static_files():
+    """从数据库导出静态文件到 demo/ 目录"""
+    with app.app_context():
+        # 读取所有数据
+        profile = Profile.query.first()
+        if not profile:
+            return {'success': False, 'error': 'No profile data'}
+        
+        links = Link.query.order_by(Link.order).all()
+        skills = Skill.query.order_by(Skill.order).all()
+        projects = Project.query.order_by(Project.order).all()
+        
+        # 生成静态数据 JSON
+        static_data = {
+            'profile': {
+                'name': profile.name,
+                'title': profile.title,
+                'bio': profile.bio.replace('<br>', '\n'),
+                'avatar': profile.avatar,
+                'location': profile.location,
+                'email': profile.email
+            },
+            'links': [{
+                'name': l.name,
+                'url': l.url,
+                'icon': l.icon
+            } for l in links],
+            'skills': [{
+                'name': s.name,
+                'level': s.level,
+                'color': s.color
+            } for s in skills],
+            'projects': [{
+                'name': p.name,
+                'description': p.description,
+                'url': p.url,
+                'tech': p.tech.split(',') if p.tech else []
+            } for p in projects]
+        }
+        
+        # 确保 demo 目录存在
+        demo_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'demo')
+        os.makedirs(demo_dir, exist_ok=True)
+        
+        # 写入 data.json
+        data_path = os.path.join(demo_dir, 'data.json')
+        with open(data_path, 'w', encoding='utf-8') as f:
+            json.dump(static_data, f, ensure_ascii=False, indent=2)
+        
+        # 计算数据哈希（用于检测变化）
+        data_hash = hashlib.md5(json.dumps(static_data, sort_keys=True).encode()).hexdigest()
+        hash_path = os.path.join(demo_dir, '.hash')
+        with open(hash_path, 'w') as f:
+            f.write(data_hash)
+        
+        # 更新导出时间戳
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        with open(os.path.join(demo_dir, '.last-export'), 'w') as f:
+            f.write(timestamp)
+        
+        return {
+            'success': True,
+            'files': ['demo/data.json', 'demo/.hash', 'demo/.last-export'],
+            'hash': data_hash,
+            'timestamp': timestamp
+        }
+
+@app.route('/api/export', methods=['POST'])
+def api_export():
+    """导出静态文件 API"""
+    result = export_static_files()
+    if result['success']:
+        return jsonify(result), 200
+    return jsonify(result), 500
 
 # ==================== 路由 ====================
 
