@@ -16,6 +16,10 @@
 - 📊 **可视化管理** - Flask-Admin 后台
 - 🚀 **轻量级** - 内存占用 < 100MB
 
+## 🌐 在线演示
+
+访问 GitHub Pages 演示：https://nasplycc.github.io/personal-homepage/
+
 ## 📦 项目结构
 
 ```
@@ -30,6 +34,7 @@ personal-homepage/
 │       │   └── style.css    # 样式文件
 │       └── js/
 │           └── app.js       # 前端脚本
+├── demo/                     # GitHub Pages 静态演示
 ├── data/                     # 数据库目录 (已忽略)
 ├── docker-compose.yml        # Docker 配置
 ├── Dockerfile               # 镜像构建
@@ -43,7 +48,7 @@ personal-homepage/
 
 ```bash
 # 克隆项目
-git clone https://github.com/YOUR_USERNAME/personal-homepage.git
+git clone https://github.com/nasplycc/personal-homepage.git
 cd personal-homepage
 
 # 启动服务
@@ -113,6 +118,7 @@ with app.app_context():
 - **数据库**: SQLite
 - **前端**: HTML5 + CSS3 + JavaScript
 - **部署**: Docker + Docker Compose
+- **演示**: GitHub Pages
 
 ## 📝 API
 

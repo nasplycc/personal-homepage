@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaben Zhou | Personal Homepage Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+    <div class="scanline"></div>
+    
+    <div class="main-container">
+        <nav class="top-nav">
+            <div class="nav-left">
+                <span class="nav-logo">
+                    <span class="prompt">&gt;_</span>
+                    <span class="logo-text">JABEN ZHOU</span>
+                </span>
+            </div>
+            <ul class="nav-center">
+                <li class="nav-link active">HOME</li>
+                <li class="nav-link">ABOUT</li>
+                <li class="nav-link">PROJECTS</li>
+                <li class="nav-link">SKILLS</li>
+                <li class="nav-link">CONNECT</li>
+            </ul>
+            <div class="nav-right">
+                <span class="online-status">
+                    <span class="status-dot"></span>
+                    <span class="status-label">ONLINE</span>
+                </span>
+            </div>
+        </nav>
+        
+        <section class="card hero-section">
+            <div class="card-corners">
+                <span class="corner tl"></span>
+                <span class="corner tr"></span>
+                <span class="corner bl"></span>
+                <span class="corner br"></span>
+            </div>
+            <div class="hero-body">
+                <div class="hero-avatar">
+                    <div class="avatar-glow"></div>
+                    <div class="avatar-ring"></div>
+                    <div class="avatar-circle">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="hero-content">
+                    <h1 class="hero-name glitch" data-text="Jaben Zhou">Jaben Zhou</h1>
+                    <p class="hero-title">技术爱好者 / NAS 玩家 / 自动化实践</p>
+                    <p class="hero-bio">热爱折腾，享受自动化带来的便利。<br>专注于构建高效、智能的个人技术栈。</p>
+                    <div class="hero-footer">
+                        <span class="hero-status">
+                            <span class="status-dot small"></span>
+                            <span class="status-text">ONLINE</span>
+                        </span>
+                        <span class="hero-divider"></span>
+                        <span class="hero-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>中国</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="card skills-section">
+            <div class="card-corners">
+                <span class="corner tl"></span>
+                <span class="corner tr"></span>
+                <span class="corner bl"></span>
+                <span class="corner br"></span>
+            </div>
+            <h2 class="section-header">
+                <span class="header-icon"><i class="fas fa-microchip"></i></span>
+                <span class="header-text">SKILL_MATRIX</span>
+                <span class="header-line"></span>
+            </h2>
+            <div class="skills-body">
+                <div class="skill-item">
+                    <div class="skill-top">
+                        <div class="skill-icon-box docker">
+                            <i class="fab fa-docker"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name-row">
+                                <span class="skill-name">Docker</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="background: #00a8dc; width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-top">
+                        <div class="skill-icon-box nas">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name-row">
+                                <span class="skill-name">NAS & 存储</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="background: #a855f7; width: 90%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-top">
+                        <div class="skill-icon-box python">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name-row">
+                                <span class="skill-name">Python</span>
+                                <span class="skill-percent">75%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="background: #3b82f6; width: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-top">
+                        <div class="skill-icon-box linux">
+                            <i class="fab fa-linux"></i>
+                        </div>
+                        <div class="skill-info">
+                            <div class="skill-name-row">
+                                <span class="skill-name">Linux</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="background: #ffd93d; width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="card projects-section">
+            <div class="card-corners">
+                <span class="corner tl"></span>
+                <span class="corner tr"></span>
+                <span class="corner bl"></span>
+                <span class="corner br"></span>
+            </div>
+            <h2 class="section-header">
+                <span class="header-icon"><i class="fas fa-folder"></i></span>
+                <span class="header-text">精选项目</span>
+                <span class="header-line"></span>
+            </h2>
+            <div class="projects-body">
+                <div class="project-item">
+                    <div class="project-icon-box nas">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="project-name">
+                        NAS 自托管
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="project-desc">搭建高可用 NAS 系统，数据存储与备份方案</div>
+                </div>
+                <div class="project-item">
+                    <div class="project-icon-box automation">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-name">
+                        自动化工作流
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="project-desc">用脚本与自动化工具提升效率，解放双手</div>
+                </div>
+                <div class="project-item">
+                    <div class="project-icon-box ai">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="project-name">
+                        AI 工具探索
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="project-desc">探索 AI 应用与工具，让技术创造更多可能</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="card connect-section">
+            <div class="card-corners">
+                <span class="corner tl"></span>
+                <span class="corner tr"></span>
+                <span class="corner bl"></span>
+                <span class="corner br"></span>
+            </div>
+            <h2 class="section-header">
+                <span class="header-icon"><i class="fas fa-link"></i></span>
+                <span class="header-text">CONNECT</span>
+                <span class="header-line"></span>
+            </h2>
+            <div class="connect-body">
+                <a href="https://github.com" class="link-item github" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <a href="https://telegram.org" class="link-item telegram" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                    <span>Telegram</span>
+                </a>
+                <a href="mailto:hello@example.com" class="link-item email" target="_blank">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+            </div>
+        </section>
+        
+        <footer class="terminal-bar">
+            <div class="terminal-left">
+                <span class="terminal-prompt">root@jaben:~$</span>
+                <span class="terminal-command">whoami</span>
+                <span class="terminal-cursor"></span>
+            </div>
+            <div class="terminal-middle">
+                <span class="terminal-output-user">jaben_zhou</span>
+                <span class="terminal-output-desc">— 技术折腾者 & 自动化实践者</span>
+            </div>
+            <div class="terminal-right">
+                <span class="terminal-status">SYSTEM ONLINE</span>
+                <span class="status-dot tiny"></span>
+                <span class="terminal-time" id="timestamp">2024-06-26 16:14:18</span>
+            </div>
+        </footer>
+    </div>
+    
+    <a href="https://github.com/nasplycc/personal-homepage" class="admin-btn" target="_blank" title="View on GitHub">
+        <i class="fab fa-github"></i>
+    </a>
+    
+    <script src="app.js"></script>
+</body>
+</html>
