@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理后台登录</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        
+        .login-container {
+            background: rgba(8, 12, 24, 0.9);
+            border: 1px solid rgba(20, 40, 80, 0.8);
+            border-radius: 14px;
+            padding: 40px;
+            width: 400px;
+            max-width: 90%;
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #00d4ff, #a855f7, #ec4899);
+            border-radius: 16px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .login-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, #00d4ff, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .login-icon {
+            text-align: center;
+            font-size: 3rem;
+            color: #00d4ff;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(10, 18, 35, 0.6);
+            border: 1px solid rgba(30, 50, 90, 0.5);
+            border-radius: 8px;
+            color: #e8eef8;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00d4ff, #a855f7);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
+        }
+        
+        .flash-message {
+            padding: 12px 16px;
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 8px;
+            color: #ec4899;
+            font-size: 13px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .back-link a {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+        
+        .back-link a:hover {
+            color: #00d4ff;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+    <div class="scanline"></div>
+    
+    <div class="login-container">
+        <div class="login-icon">
+            <i class="fas fa-lock"></i>
+        </div>
+        <h2 class="login-title">ADMIN LOGIN</h2>
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="flash-message">
+            {{ messages[0] }}
+        </div>
+        {% endif %}
+        {% endwith %}
+        
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="form-group">
+                <label>USERNAME</label>
+                <input type="text" name="username" required autofocus>
+            </div>
+            
+            <div class="form-group">
+                <label>PASSWORD</label>
+                <input type="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> LOGIN
+            </button>
+        </form>
+        
+        <div class="back-link">
+            <a href="/">← 返回首页</a>
+        </div>
+    </div>
+    
+    <script>
+        // 矩阵雨背景
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const chars = '的了一是不在了人有我他这个要不人都在个上着地说来到和大为子也地用里出会所以可就过发以生和自年都时后那最里如天去长得小多没要为看开己手行方做里家十从两钱还女但并体无本口三经么好就月出能么么为在理物公动法内高起当工分老和学现力前所同马点此方定放几向道水见对二于下得已让电者事给化想代名心全分四前空几定放0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz(){}[]<>=+-*/%_';
+        const charArray = chars.split('');
+        
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * canvas.height / fontSize;
+        }
+        
+        function draw() {
+            ctx.fillStyle = 'rgba(2, 4, 10, 0.06)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.font = fontSize + 'px JetBrains Mono';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const char = charArray[Math.floor(Math.random() * charArray.length)];
+                const rand = Math.random();
+                
+                if (rand > 0.90) ctx.fillStyle = '#ffffff';
+                else if (rand > 0.65) ctx.fillStyle = '#00ff88';
+                else ctx.fillStyle = '#00d4ff';
+                
+                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        setInterval(draw, 50);
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>

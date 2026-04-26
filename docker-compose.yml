@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  homepage:
+    build: .
+    container_name: personal-homepage
+    ports:
+      - "5533:5533"
+    volumes:
+      - ./data:/app/data
+      - ./app/static:/app/static
+    environment:
+      - FLASK_ENV=production
+      - SECRET_KEY=change-this-to-random-secret
+    restart: unless-stopped
+    networks:
+      - homepage-network
+
+networks:
+  homepage-network:
+    driver: bridge
